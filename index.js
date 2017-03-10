@@ -13,6 +13,6 @@ exports.ScheduledReporter = Reporting.ScheduledReporter;
 exports.ConsoleReporter = Reporting.ConsoleReporter;
 exports.CsvReporter = Reporting.CsvReporter;
 exports.GraphiteReporter = Reporting.GraphiteReporter;
+exports.WavefrontReporter = Reporting.WavefrontReporter;
 
 exports.version = '0.1.10';
-

@@ -1,14 +1,22 @@
 var EWMA = require('../stats/exponentially_weighted_moving_average.js');
 /*
-*  
+*
 */
-var Meter = module.exports = function Meter() {
+var Meter = module.exports = function Meter(tags) {
   this.m1Rate = EWMA.createM1EWMA();
   this.m5Rate = EWMA.createM5EWMA();
   this.m15Rate = EWMA.createM15EWMA();
   this.count = 0;
   this.startTime = (new Date).getTime();
   this.type = 'meter';
+  if (!isEmpty(tags)) {
+    this.tags = tags
+  }else{
+    this.tags = {}
+  }
+  if(!(Object.keys(this.tags).length === 0 && this.tags.constructor === Object)){
+    console.log('Meter tag string: %s', this.tags);
+  }
 }
 
 // Mark the occurence of n events
@@ -58,4 +66,8 @@ Meter.prototype.tick = function(){
   this.m1Rate.tick();
   this.m5Rate.tick();
   this.m15Rate.tick();
+}
+
+function isEmpty(value) {
+  return typeof value == 'string' && !value.trim() || typeof value == 'undefined' || value === null;
 }

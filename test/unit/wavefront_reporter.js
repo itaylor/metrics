@@ -3,19 +3,19 @@ var chai = require('chai')
   , expect = chai.expect
   , assert = chai.assert
   , describe = require('mocha').describe
-  , helper = require('./helper.js')
+  , helper = require('./helper_tags.js')
   , it = require('mocha').it
   , net = require('net')
   , util = require('util')
   , os = require('os')
-  , GraphiteReporter = require('../../').GraphiteReporter;
+  , WavefrontReporter = require('../../').WavefrontReporter;
 
 chai.use(require('chai-string'));
 
 
-describe('GraphiteReporter', function () {
+describe('WavefrontReporter', function () {
   this.timeout(30000);
-  it ('should report to graphite.', function (done) {
+  it ('should report to wavefront.', function (done) {
     var connectCount = 0;
     var reporter;
     var dataByTs = {};
@@ -58,7 +58,7 @@ describe('GraphiteReporter', function () {
             callback();
           }
           var totalReports = Object.keys(dataByTs).length;
-          //console.log('totalReports graphite: %s', totalReports);
+          console.log('totalReports: %s', totalReports);
           // should expect more reports since disconnected.
           expect(totalReports).to.be.greaterThan(countOnDisconnect);
 
@@ -86,7 +86,7 @@ describe('GraphiteReporter', function () {
     server.listen( function() {
       var address = server.address();
       var report = helper.getSampleReport();
-      reporter = new GraphiteReporter(report, "host1", address.address, address.port);
+      reporter = new WavefrontReporter(report, "host1", address.address, address.port,{ tag0: "default" });
       reporter.on('log', function(level, msg, exc) {
         if(exc) {
           debug('%s -- %s (%s)', level, msg, exc);
