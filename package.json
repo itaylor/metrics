@@ -1,12 +1,12 @@
 {
-  "name": "metrics",
-  "description": "A node.js port of Coda Hale's metrics library.  In use at Yammer.",
+  "name": "wavefrontmetrics",
+  "description": "A node.js port of Coda Hale's metrics library.  In use at Yammer.Modified to add tags to metric data",
   "version": "0.1.11",
   "repository": {
     "type": "git",
-    "url": "git://github.com/mikejihbe/metrics.git"
+    "url": "git://github.com/paragsanghavi/metrics.git"
   },
-  "author": "Mike Ihbe <mikejihbe@gmail.com> (mikeihbe.com)",
+  "author": "Parag Sanghavi <paragsanghavi@gmail.com> (wavefront.com)",
   "directories": {
     "lib": "."
   },
